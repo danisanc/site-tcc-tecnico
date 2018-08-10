@@ -4,4 +4,4 @@ Esse foi o primeiro site que eu criei, foi feito para apresentar um programa des
 
 **OBS:** Quando criei o site eu ainda não usava gulp, adicionei ele recentemente para otimizar antes de dar deploy, mas a estrutura é a mesma :)
 
-[Veja online](https://site-tcc-knplbuyhwl.now.sh/Index)
+[Veja online](https://site-tcc-nxefjetfcp.now.sh/)
