@@ -1,24 +1,32 @@
-var gulp = require('gulp')
-var imagemin = require('gulp-imagemin')
-var cssmin = require('gulp-cssmin')
-var rename = require('gulp-rename')
-var autoprefixer = require('gulp-autoprefixer')
+const { src, dest, parallel } = require('gulp')
+const imagemin = require('gulp-imagemin')
+const cleanCSS = require('gulp-clean-css')
+const rename = require('gulp-rename')
+const autoprefixer = require('gulp-autoprefixer')
+const minify = require('gulp-minify');
 
-gulp.task('default', ['css_min', 'image'])
 
-gulp.task('css_min', function () {
-  gulp.src('./src/css/*.css')
+function cleanCss() {
+  return src('./src/css/*.css')
     .pipe(autoprefixer({
       browsers: ['last 2 versions'],
       cascade: false
     }))
-    .pipe(cssmin())
+    .pipe(cleanCSS({compatibility: 'ie8'}))
     .pipe(rename({suffix: '.min'}))
-    .pipe(gulp.dest('./assets/css/'))
-})
+    .pipe(dest('./assets/css/'))
+}
 
-gulp.task('image', function() {
-  gulp.src('./src/img/*')
+function image() {
+  return src('./src/img/*')
     .pipe(imagemin())
-    .pipe(gulp.dest('./assets/img/'))
-})
+    .pipe(dest('./assets/img/'))
+}
+
+function javascript() {
+  return src('./src/js/*.js')
+    .pipe(minify())
+    .pipe(dest('./assets/js/'))
+}
+
+exports.default = parallel(cleanCss, javascript, image)
