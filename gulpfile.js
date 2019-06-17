@@ -14,19 +14,19 @@ function cleanCss() {
     }))
     .pipe(cleanCSS({compatibility: 'ie8'}))
     .pipe(rename({suffix: '.min'}))
-    .pipe(dest('./assets/css/'))
+    .pipe(dest('./docs/css/'))
 }
 
 function image() {
   return src('./src/img/*')
     .pipe(imagemin())
-    .pipe(dest('./assets/img/'))
+    .pipe(dest('./docs/img/'))
 }
 
 function javascript() {
   return src('./src/js/*.js')
     .pipe(minify())
-    .pipe(dest('./assets/js/'))
+    .pipe(dest('./docs/js/'))
 }
 
 exports.default = parallel(cleanCss, javascript, image)
